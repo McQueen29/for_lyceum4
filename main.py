@@ -1,17 +1,14 @@
 import sys
 from random import randint
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5 import uic
 
 
 class Example(QWidget):
     def __init__(self):
         super().__init__()
-        self.setGeometry(300, 300, 500, 500)
-        self.setWindowTitle('окружности')
-        self.btn_create = QPushButton('Создать', self)
-        self.btn_create.resize(100, 50)
-        self.btn_create.move(0, 0)
+        uic.loadUi('UI.ui', self)
         self.do_paint = False
         self.btn_create.clicked.connect(self.paint)
 
@@ -27,14 +24,11 @@ class Example(QWidget):
         self.repaint()
 
     def draw_circle(self, qp):
-        r = randint(0, 255)
-        g = randint(0, 255)
-        b = randint(0, 255)
-        qp.setBrush(QColor(r, g, b))
+        qp.setBrush(QColor(255, 255, 0))
         rx = randint(75, 450)
         yx = randint(75, 450)
-        R = randint(1, 50)
-        qp.drawEllipse(rx, yx, R, R)
+        r = randint(1, 50)
+        qp.drawEllipse(rx, yx, r, r)
 
 
 if __name__ == '__main__':
